@@ -5,9 +5,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.Random;
 import mino.Block;
 import mino.Mino;
+import mino.Mino_Bar;
 import mino.Mino_L1;
+import mino.Mino_L2;
+import mino.Mino_Square;
+import mino.Mino_T;
+import mino.Mino_Z1;
+import mino.Mino_Z2;
 
 public class PlayManager {
 
@@ -23,6 +31,11 @@ public class PlayManager {
     Mino currentMino;
     final int MINO_START_X;
     final int MINO_START_Y;
+    Mino nextMino;
+    final int NEXTMINO_X;
+    final int NEXTMINO_Y;
+    public static ArrayList<Block> staticBlocks = new ArrayList<>();
+    
 
     //Others
     public static int dropInterval = 60; //mino drops every 60 frames
@@ -39,14 +52,51 @@ public PlayManager() {
     MINO_START_X = left_x + (WIDTH/2) - Block.SIZE;
     MINO_START_Y = top_y + Block.SIZE;
 
+    NEXTMINO_X = right_x + 175;
+    NEXTMINO_Y = top_y + 500;
+
     //Set the staring Mino
-    currentMino = new Mino_L1();
+    currentMino = pickMino();
     currentMino.setXY(MINO_START_X, MINO_START_Y);
-    
+    nextMino = pickMino();
+    nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+    }
+    private Mino pickMino() {
+        
+        // Pick a Random Mino
+        Mino mino = null;
+        int i = new Random().nextInt(7);
+
+        switch(i) {
+            case 0: mino = new Mino_L1();break;
+            case 1: mino = new Mino_L2();break;
+            case 2: mino = new Mino_Square();break;
+            case 3: mino = new Mino_Bar();break;
+            case 4: mino = new Mino_T(); break;
+            case 5: mino = new Mino_Z1(); break;
+            case 6: mino = new Mino_Z2();break;
+        }
+        return mino;
     }
     public void update() {
-        
-        currentMino.update();
+
+        //Check if the currentMino is Active
+        if(currentMino.active == false) {
+            // if the mino is not active, put it into the staticBlocks
+            staticBlocks.add(currentMino.b[0]);
+            staticBlocks.add(currentMino.b[1]);
+            staticBlocks.add(currentMino.b[2]);
+            staticBlocks.add(currentMino.b[3]);
+
+            // replace the currenMino with the nextMino
+            currentMino = nextMino;
+            currentMino.setXY(MINO_START_X, MINO_START_Y);
+            nextMino = pickMino();
+            nextMino.setXY(NEXTMINO_X,NEXTMINO_Y);
+        }
+        else {
+            currentMino.update();
+        }
     }
     public void draw(Graphics2D g2) {
 
@@ -67,6 +117,21 @@ public PlayManager() {
         if(currentMino != null) {
             currentMino.draw(g2);
         }
+        // Draw the nextMino
+        nextMino.draw(g2);
 
+        // Draw Static Blocks
+        for(int i = 0; i < staticBlocks.size(); i++) {
+            staticBlocks.get(i).draw(g2);
+        }
+
+        // Draw Pause
+        g2.setColor(Color.yellow);
+        g2.setFont(g2.getFont(). deriveFont(50f));
+        if(KeyHandler.pausePressed) {
+            x = left_x + 70;
+            y = top_y + 320;
+            g2.drawString("PAUSED", x, y);
+        }
     }
 }
