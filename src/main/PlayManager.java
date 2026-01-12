@@ -105,6 +105,8 @@ public PlayManager() {
                 // this means the currentMino immediately collided a block and couldn't move at all
                 // so it's xy are the same with the nextMino's
                 gameOver = true;
+                GamePanel.music.stop();
+                GamePanel.se.play(2, false);
             }
 
             currentMino.deactivating = false;
@@ -189,6 +191,7 @@ public PlayManager() {
 
         // Add Score
         if(lineCount > 0) {
+            GamePanel.se.play(1, false);
             int singleLineScore = 10 * level;
             score += singleLineScore * lineCount;
         }

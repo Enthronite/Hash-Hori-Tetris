@@ -8,6 +8,7 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineEvent.Type;
 import javax.sound.sampled.LineListener;
 
+
 public class Sound {
 
     Clip musicClip;

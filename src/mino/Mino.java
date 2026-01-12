@@ -2,6 +2,7 @@ package mino;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import main.GamePanel;
 import main.KeyHandler;
 import main.PlayManager;
 
@@ -147,7 +148,8 @@ public class Mino {
             case 3: getDirection4();break;
             case 4: getDirection1();break;
            }
-           KeyHandler.upPressed = false; 
+           KeyHandler.upPressed = false;
+           GamePanel.se.play(3, false);
         }
 
         checkMovementCollision();
@@ -187,6 +189,9 @@ public class Mino {
         }
 
         if(bottomCollision) {
+            if(deactivating == false) {
+                GamePanel.se.play(4, false);
+            }
             deactivating = true;
         }
         else {

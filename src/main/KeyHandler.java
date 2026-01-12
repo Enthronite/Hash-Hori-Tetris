@@ -27,12 +27,15 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_SPACE) {
             if(pausePressed) {
                 pausePressed = false;
+                GamePanel.music.play(0, true);
+                GamePanel.music.loop();
             }
             else {
                 pausePressed = true;
+                GamePanel.music.stop();
             }
         }
-        /*if(code == KeyEvent.VK_UP) {
+        if(code == KeyEvent.VK_UP) {
             upPressed = true;
         }
         if(code == KeyEvent.VK_LEFT) {
@@ -43,7 +46,7 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
-        }*/
+        }
     }
 
     @Override
