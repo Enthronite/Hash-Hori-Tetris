@@ -13,6 +13,8 @@ public class Mino {
     public int direction = 1; // There are 4 directions (1/2/3/4)
     boolean leftCollision, rightCollision, bottomCollision;
     public boolean active = true;
+    public boolean deactivating;
+    int deactivateCounter = 0;
 
     public void create(Color c) {
         b[0] = new Block(c);
@@ -133,6 +135,10 @@ public class Mino {
     }
     public void update() {
 
+        if (deactivating) {
+            deactivating ();
+        }
+
         //Move the mino
         if(KeyHandler.upPressed) {
            switch(direction) {
@@ -181,7 +187,7 @@ public class Mino {
         }
 
         if(bottomCollision) {
-            active = false;
+            deactivating = true;
         }
         else {
             autoDropCounter++; //the counter increases in every frame
@@ -194,6 +200,22 @@ public class Mino {
                 autoDropCounter = 0;
             }
         }    
+    }
+    private void deactivating() {
+
+        deactivateCounter++;
+
+        //Wait 45 frames until its deactivated
+        if(deactivateCounter == 45) {
+
+            deactivateCounter = 0;
+            checkMovementCollision(); // check if the bottom is still hitting
+
+            // if the bottom is still hitting after 45 frames, deactivate the mino
+            if(bottomCollision) {
+                active = false;
+            }
+        }
     }
     public void draw(Graphics2D g2) {
 
