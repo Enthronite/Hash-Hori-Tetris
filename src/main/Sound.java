@@ -15,7 +15,7 @@ public class Sound {
 
     public Sound() {
 
-        url[0] = getClass().getResource("/champion-red-battle-music.wav");
+        url[0] = getClass().getResource("/trainer red battle theme.wav");
         url[1] = getClass().getResource("/delete line.wav");
         url[2] = getClass().getResource("/gameover.wav");
         url[3] = getClass().getResource("/rotation.wav");

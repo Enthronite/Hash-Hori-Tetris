@@ -149,7 +149,7 @@ public class Mino {
             case 4: getDirection1();break;
            }
            KeyHandler.upPressed = false;
-           GamePanel.se.play(3, false);
+           GamePanel.se.play(1, false);
         }
 
         checkMovementCollision();
