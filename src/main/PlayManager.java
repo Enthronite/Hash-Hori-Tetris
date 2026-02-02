@@ -263,10 +263,10 @@ public PlayManager() {
         }
 
         // Draw the Game Title
-        x = 50;
-        y = top_y + 500;
+        x = 550;
+        y = top_y - 14;
         g2.setColor(Color.white);
-        g2.setFont(new Font("Times New Roman", Font.ITALIC, 50));
+        g2.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 20));
         g2.drawString("Hash Hori Tetris", x + 20, y);
 
     }
