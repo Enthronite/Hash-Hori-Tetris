@@ -19,9 +19,9 @@ public class Sound {
         url[1] = getClass().getResource("/delete line.wav");
         url[2] = getClass().getResource("/gameover.wav");
         url[3] = getClass().getResource("/rotation.wav");
-        url[0] = getClass().getResource("/touch floor.wav");
+        url[4] = getClass().getResource("/touch floor.wav");
     }
-    public void play(int i, boolean music) {
+    public void play(int i, boolean music) { 
 
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(url[i]);
