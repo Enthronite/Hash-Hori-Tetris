@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Mino_Z2 extends Mino{
 
     public Mino_Z2() {
-        create(Color.green);
+        create(Color.white);
     }
     public void setXY(int x, int y) {
         // 0

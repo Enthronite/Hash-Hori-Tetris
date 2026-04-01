@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Mino_Bar extends Mino{
 
     public Mino_Bar() {
-        create(Color.cyan);
+        create(Color.white);
     }
     public void setXY(int x, int y) {
         //
@@ -58,4 +58,5 @@ public void getDirection3() {
 public void getDirection4() {
     getDirection2();
 }
+
 }
