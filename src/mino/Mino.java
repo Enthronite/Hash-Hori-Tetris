@@ -18,10 +18,14 @@ public class Mino {
     int deactivateCounter = 0;
 
     public void create(Color c) {
+
+        //b means the block that makes the mino
         b[0] = new Block(c);
         b[1] = new Block(c);
         b[2] = new Block(c);
         b[3] = new Block(c);
+        
+        //tempB means the block that is used to check the rotation collision
         tempB[0] = new Block(c);
         tempB[1] = new Block(c);
         tempB[2] = new Block(c);
@@ -226,10 +230,10 @@ public class Mino {
 
         int margin = 2;
         g2.setColor(b[0].c);
-        g2.fillRect(b[0].x+margin, b[0].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        g2.fillRect(b[1].x+margin, b[1].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        g2.fillRect(b[2].x+margin, b[2].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        g2.fillRect(b[3].x+margin, b[3].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
+        // g2.drawString("#",b[0].x+margin, b[0].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
+        // g2.drawString("#",b[1].x+margin, b[1].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
+        // g2.drawString("#",b[2].x+margin, b[2].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
+        // g2.drawString("#",b[3].x+margin, b[3].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
 
     }
 }

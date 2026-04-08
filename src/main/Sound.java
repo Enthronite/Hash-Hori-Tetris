@@ -15,15 +15,19 @@ public class Sound {
 
     public Sound() {
 
-        url[0] = getClass().getResource("/trainer red battle theme.wav");
-        url[1] = getClass().getResource("/delete line.wav");
-        url[2] = getClass().getResource("/gameover.wav");
-        url[3] = getClass().getResource("/rotation.wav");
-        url[4] = getClass().getResource("/touch floor.wav");
+        url[0] = getClass().getResource("/res/trainer red battle theme.wav");
+        url[1] = getClass().getResource("/res/delete line.wav");
+        url[2] = getClass().getResource("/res/gameover.wav");
+        url[3] = getClass().getResource("/res/rotation.wav");
+        url[4] = getClass().getResource("/res/touch floor.wav");
     }
     public void play(int i, boolean music) { 
 
         try {
+            if (url[i] == null) {
+                System.err.println("Audio resource not found for index " + i);
+                return;
+            }
             AudioInputStream ais = AudioSystem.getAudioInputStream(url[i]);
             Clip clip = AudioSystem.getClip();
 
@@ -44,9 +48,14 @@ public class Sound {
             clip.start();
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     } 
     public void loop() {
+        if (musicClip == null) {
+            System.err.println("musicClip is null. Cannot loop music.");
+            return;
+        }
         musicClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
     public void stop() {
