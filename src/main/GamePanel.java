@@ -10,6 +10,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
+    //-----------------------------------------------
+
+    public static final int SMALLBOX_WIDTH = 1280;
+    public static final int SMALLBOX_HEIGHT = 720;
+
+    //-----------------------------------------------
     final int FPS = 60;
     Thread gameThread;
     PlayManager pm;

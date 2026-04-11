@@ -20,12 +20,18 @@ import mino.Mino_Z2;
 public class PlayManager {
 
     //Main Play Area
-    final int WIDTH = 360;
-    final int HEIGHT = 600;
+
+    // final int WIDTH = 360;
+    // final int HEIGHT = 600;
+
+//--------------------------------------
+    final int WIDTH = 600;
+    final int HEIGHT = 360;
     public static int  left_x;
     public static int right_x;
-    public static int top_y;
     public static int bottom_y;
+    public static int top_y;
+
 
     //Mino
     Mino currentMino;
@@ -51,15 +57,14 @@ public class PlayManager {
     int lines;
     int score;
 
-
-
 public PlayManager() {
 
     //Main Play Area Frame
-    left_x = (GamePanel.WIDTH/2) - (WIDTH/2); //1280 - 360/2 = 460
+
+    left_x = (GamePanel.WIDTH/2) - (WIDTH/2); //1280Hori - 360/2 = 460 
     right_x = left_x + WIDTH;
     top_y = 50;
-    bottom_y = top_y +HEIGHT;
+    bottom_y = top_y + HEIGHT;
 
     MINO_START_X = left_x + (WIDTH/2) - Block.SIZE;
     MINO_START_Y = top_y + Block.SIZE;
@@ -67,11 +72,14 @@ public PlayManager() {
     NEXTMINO_X = right_x + 175;
     NEXTMINO_Y = top_y + 500;
 
+    
     //Set the starting Mino
-    currentMino = pickMino();
+
+    currentMino = pickMino(); 
     currentMino.setXY(MINO_START_X, MINO_START_Y);
     nextMino = pickMino();
     nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+
     }
     private Mino pickMino() {
         
@@ -112,6 +120,7 @@ public PlayManager() {
             currentMino.deactivating = false;
 
             // replace the currenMino with the nextMino
+
             currentMino = nextMino;
             currentMino.setXY(MINO_START_X, MINO_START_Y);
             nextMino = pickMino();
@@ -204,17 +213,18 @@ public PlayManager() {
         g2.drawRect(left_x-4, top_y-4, WIDTH+8, HEIGHT+8);
 
         //Draw Next Mino Frame
-        int x = right_x + 100;
-        int y = bottom_y - 200;
+        int x = right_x + 90;
+        int y = bottom_y + 40;
         g2.drawRect(x, y, 200, 200);
         g2.setFont(new Font("Arial", Font.PLAIN, 30));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.drawString("NEXT", x+60, y+60);
 
+
         // Draw Score Frame
-        g2.drawRect(x, top_y, 250, 300);
+        g2.drawRect(x, top_y, 200, 300);
         x += 40;
-        y = top_y + 90;
+        y = top_y + 80;
         g2.drawString("LEVEL: " + level, x, y); y+= 70;
         g2.drawString("LINES: " + level, x, y); y+= 70;
         g2.drawString("SCORE: " + score, x, y);
@@ -252,22 +262,22 @@ public PlayManager() {
         g2.setColor(Color.yellow);
         g2.setFont(g2.getFont(). deriveFont(50f));
         if(gameOver) {
-            x = left_x + 25;
+            x = left_x + 130;
             y = top_y + 320;
             g2.drawString("GAME OVER", x, y);
         }
         else if(KeyHandler.pausePressed) {
-            x = left_x + 70;
+            x = left_x + 200;
             y = top_y + 320;
             g2.drawString("PAUSED", x, y);
         }
 
         // Draw the Game Title
-        x = 550;
-        y = top_y - 14;
+        x = 450;
+        y = top_y + 620;
         g2.setColor(Color.white);
-        g2.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 20));
-        g2.drawString("Hash Hori Tetris", x + 20, y);
+        g2.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 40));
+        g2.drawString("# Hash Hori Tetris ", x + 20, y);
 
     }
 }

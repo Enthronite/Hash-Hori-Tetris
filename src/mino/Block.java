@@ -30,16 +30,4 @@ public class Block extends Rectangle
         g2.drawString("#", cx, cy);
      }
 
-    // public void draw(Graphics g)
-    // {
-    //     super.draw(g);
-    //     g.setFont(new Font("Monospaced", Font.BOLD, 18));
-    //     for (Block block : blocks) 
-    //         {
-    //         g.setColor(block.c);
-    //         // Draw '#' at the block's position
-    //         g.drawString("#", block.x * cellSize, (block.y + 1) * cellSize);
-    //         }
-    // }
-
 }
