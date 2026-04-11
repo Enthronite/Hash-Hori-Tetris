@@ -230,10 +230,11 @@ public class Mino {
 
         int margin = 2;
         g2.setColor(b[0].c);
-        // g2.drawString("#",b[0].x+margin, b[0].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        // g2.drawString("#",b[1].x+margin, b[1].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        // g2.drawString("#",b[2].x+margin, b[2].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
-        // g2.drawString("#",b[3].x+margin, b[3].y+margin, Block.SIZE-(margin*2), Block.SIZE-(margin*2));
+        g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, Block.SIZE));
+        g2.drawString("#",b[0].x+margin, b[0].y+Block.SIZE - margin );
+        g2.drawString("#",b[1].x+margin, b[1].y+Block.SIZE - margin );
+        g2.drawString("#",b[2].x+margin, b[2].y+Block.SIZE - margin );
+        g2.drawString("#",b[3].x+margin, b[3].y+Block.SIZE - margin );
 
     }
 }
