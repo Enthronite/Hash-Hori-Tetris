@@ -7,12 +7,12 @@ public class Mino_Bar extends Mino{
     public Mino_Bar() {
         create(Color.white);
     }
-    public void setXY(int x, int y) {
+    public void setXY(int y, int x) {
         //
         // 0000
         //
-        b[0].x = x;
-        b[0].y = y;
+        b[0].x = y;
+        b[0].y = x;
         b[1].x = b[0].x - Block.SIZE;
         b[1].y = b[0].y;
         b[2].x = b[0].x + Block.SIZE;

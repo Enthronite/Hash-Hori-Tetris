@@ -8,12 +8,12 @@ public class Mino_L1 extends Mino{
         create(Color.white);
     }
 
-    public void setXY(int x, int y) {
+    public void setXY(int y, int x) {
         // O --> b[1]
         // 0 --> b[0]
         // 0 --> b[2] 0 --> b[3]
-        b[0].x = x;
-        b[0].y = y;
+        b[0].x = y;
+        b[0].y = x;
         b[1].x = b[0].x;
         b[1].y = b[0].y - Block.SIZE;
         b[2].x = b[0].x;

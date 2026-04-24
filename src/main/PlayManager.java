@@ -61,13 +61,13 @@ public PlayManager() {
 
     //Main Play Area Frame
 
-    left_x = (GamePanel.WIDTH/2) - (WIDTH/2); //1280Hori - 360/2 = 460 
+    left_x = (GamePanel.WIDTH/2) - (WIDTH/2);
     right_x = left_x + WIDTH;
     top_y = 50;
     bottom_y = top_y + HEIGHT;
 
-    MINO_START_X = left_x + (WIDTH/2) - Block.SIZE;
-    MINO_START_Y = top_y + Block.SIZE;
+    MINO_START_X = left_x + Block.SIZE;
+    MINO_START_Y = top_y + (HEIGHT / 2);
 
     NEXTMINO_X = right_x + 175;
     NEXTMINO_Y = top_y + 500;
@@ -109,7 +109,7 @@ public PlayManager() {
             staticBlocks.add(currentMino.b[3]);
 
             //check if the game is over
-            if(currentMino.b[0].x == MINO_START_X && currentMino.b[0].y == MINO_START_Y) {
+            if(currentMino.b[0].y == MINO_START_Y && currentMino.b[0].x == MINO_START_X) {
                 // this means the currentMino immediately collided a block and couldn't move at all
                 // so it's xy are the same with the nextMino's
                 gameOver = true;
@@ -135,70 +135,53 @@ public PlayManager() {
     }
     private void checkDelete() {
 
-        int x = left_x;
-        int y = top_y;
-        int blockCount = 0;
         int lineCount = 0;
+        int x = right_x - Block.SIZE;
 
-        while(x < right_x && y < bottom_y) {
-            
+        while(x >= left_x) {
+            int blockCount = 0;
+
             for(int i = 0; i < staticBlocks.size(); i++) {
-                if(staticBlocks.get(i).x == x && staticBlocks.get(i).y == y) {
-                    // increase the count if there is a static block
+                if(staticBlocks.get(i).x == x) {
                     blockCount++;
                 }
             }
-            
-            x += Block.SIZE;
 
-            if(x == right_x) {
+            if(blockCount == HEIGHT / Block.SIZE) {
 
-                // if the blockCount hits 12, that means the current y line is all filled with blocks
-                // so we can delete them
-                if(blockCount == 12) {
-                    
-                    effectCounterOn = true;
-                    effectY.add(y);
+                effectCounterOn = true;
+                effectY.add(x);
 
-                    for(int i = staticBlocks.size()-1; i > -1; i--) {
-                       // remove all the blocks in the current y line
-                       if(staticBlocks.get(i).y == y) {
-                            staticBlocks.remove(i);
-
-                       }
-                    }
-
-                    lineCount++;
-                    lines++;
-                    // Drop Speed
-                    // if the line score hits a certain number, increase the drop speed
-                    // 1 is the fastest
-                    if(lines % 10 == 0 && dropInterval > 1) {
-
-                        level++;
-                        if(dropInterval > 10) {
-                            dropInterval -= 10;
-                        } else {
-                            dropInterval -= 1;
-                        }
-                    } 
-
-                    // a line has been deleted so we need to slide down the blocks that are above it
-                    for(int i = 0; i < staticBlocks.size(); i++) {
-                        // if a block is above the current y, move it down by the block size
-                        if(staticBlocks.get(i).y < y) {
-                            staticBlocks.get(i).y += Block.SIZE;
-                        }
+                for(int i = staticBlocks.size()-1; i >= 0; i--) {
+                    if(staticBlocks.get(i).x == x) {
+                        staticBlocks.remove(i);
                     }
                 }
 
-                blockCount = 0;
-                x = left_x;
-                y += Block.SIZE;
+                lineCount++;
+                lines++;
+
+                if(lines % 10 == 0 && dropInterval > 1) {
+                    level++;
+                    if(dropInterval > 10) {
+                        dropInterval -= 10;
+                    } else {
+                        dropInterval -= 1;
+                    }
+                }
+
+                for(int i = 0; i < staticBlocks.size(); i++) {
+                    if(staticBlocks.get(i).x < x) {
+                        staticBlocks.get(i).x += Block.SIZE;
+                    }
+                }
+                // Re-check same x: blocks from the left shifted into this column
+
+            } else {
+                x -= Block.SIZE;
             }
         }
 
-        // Add Score
         if(lineCount > 0) {
             GamePanel.se.play(1, false);
             int singleLineScore = 10 * level;
@@ -248,7 +231,7 @@ public PlayManager() {
 
             g2.setColor(Color.red);
             for(int i = 0; i < effectY.size(); i++) {
-                g2.fillRect(left_x, effectY.get(i), WIDTH, Block.SIZE);
+                g2.fillRect(effectY.get(i), top_y, Block.SIZE, HEIGHT);
             }
 
             if(effectCounter == 10) {
@@ -279,5 +262,36 @@ public PlayManager() {
         g2.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 40));
         g2.drawString("# Hash Hori Tetris ", x + 20, y);
 
+        //Draw the Instructions
+        x = 100;
+        y = top_y + 380;
+        g2.setColor(Color.white);
+        g2.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+        g2.drawString("HOW TO PLAY: ", x + 50, y);
+
+        x = 130;
+        y = top_y + 430;
+        g2.setFont(new Font("Arial", Font.BOLD, 30));
+        g2.drawString("[W]", x + 40, y + 20);
+
+        x = 91;
+        y = top_y + 460;
+        g2.drawString("[A][S][D]", x + 40, y + 20);
+
+        x = 100;
+        y = top_y + 510;
+        g2.setColor(Color.white);
+        g2.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+        g2.drawString("OR ", x + 70, y + 20);
+
+        x = 130;
+        y = top_y + 570;
+        g2.setFont(new Font("Arial", Font.BOLD, 30));
+        g2.drawString("[^]", x + 40, y + 20);
+
+
+        x = 91;
+        y = top_y + 600;
+        g2.drawString("[<][V][>]", x + 40, y + 20);
     }
 }
