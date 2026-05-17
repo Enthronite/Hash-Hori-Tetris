@@ -108,7 +108,17 @@ public PlayManager() {
             staticBlocks.add(currentMino.b[2]);
             staticBlocks.add(currentMino.b[3]);
 
-            //check if the game is over
+            // Check if any block is stacked past the right boundary (game over condition)
+            for (Block block : staticBlocks) {
+                if (block.x >= right_x) {
+                    gameOver = true;
+                    GamePanel.music.stop();
+                    GamePanel.se.play(2, false);
+                    break;
+                }
+            }
+
+            //check if the game is over at spawn
             if(currentMino.b[0].y == MINO_START_Y && currentMino.b[0].x == MINO_START_X) {
                 // this means the currentMino immediately collided a block and couldn't move at all
                 // so it's xy are the same with the nextMino's
@@ -120,7 +130,6 @@ public PlayManager() {
             currentMino.deactivating = false;
 
             // replace the currenMino with the nextMino
-
             currentMino = nextMino;
             currentMino.setXY(MINO_START_X, MINO_START_Y);
             nextMino = pickMino();

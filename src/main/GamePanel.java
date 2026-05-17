@@ -8,6 +8,20 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable{
 
+    // Call this to reset the game state
+    public void resetGame() {
+        // Stop music and sound
+        music.stop();
+        se.stop();
+        // Re-initialize PlayManager and state
+        pm = new PlayManager();
+        // Restart music
+        music.play(0, true);
+        music.loop();
+        // Optionally reset other state if needed
+        repaint();
+    }
+
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
     //-----------------------------------------------

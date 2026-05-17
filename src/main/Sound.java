@@ -14,12 +14,12 @@ public class Sound {
     URL url[] = new URL[10];
 
     public Sound() {
-
-        url[0] = getClass().getResource("/res/trainer red battle theme.wav");
-        url[1] = getClass().getResource("/res/delete line.wav");
-        url[2] = getClass().getResource("/res/gameover.wav");
-        url[3] = getClass().getResource("/res/rotation.wav");
-        url[4] = getClass().getResource("/res/touch floor.wav");
+    // Use relative path for resources in bin/res/
+    url[0] = getClass().getResource("/main/res/trainer red battle theme.wav");
+    url[1] = getClass().getResource("/main/res/delete line.wav");
+    url[2] = getClass().getResource("/main/res/gameover.wav");
+    url[3] = getClass().getResource("/main/res/rotation.wav");
+    url[4] = getClass().getResource("/main/res/touch floor.wav");
     }
     public void play(int i, boolean music) { 
 

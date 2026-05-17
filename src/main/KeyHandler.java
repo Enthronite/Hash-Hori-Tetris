@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed;
+    public static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed, resetPressed;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -47,6 +47,15 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
         }
+        if(code == KeyEvent.VK_BACK_SPACE) {
+            if(resetPressed) {
+                resetPressed = false;
+                // Call resetGame on the main GamePanel instance
+                if (e.getComponent() instanceof GamePanel) {
+                    ((GamePanel)e.getComponent()).resetGame();
+                }
+            }
+        }
     }
 
     @Override
@@ -54,5 +63,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {}
+
+
 
 }
